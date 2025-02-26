@@ -4,7 +4,7 @@ BASE_DIR=$SCRIPT_DIR/../..
 
 mkdir -p ${BASE_DIR}/datasets/badminton
 
-unzip ${BASE_DIR}/datasets/TrackNetV2.zip -d ${BASE_DIR}/datasets
+unzip /content/drive/MyDrive/Projects/Thesis/TrackNetV2.zip -d ${BASE_DIR}/datasets
 
 mv ${BASE_DIR}/datasets/TrackNetV2/Professional/* ${BASE_DIR}/datasets/badminton/
 mv ${BASE_DIR}/datasets/TrackNetV2/Amateur/match1 ${BASE_DIR}/datasets/badminton/match24
