@@ -1,5 +1,5 @@
 name: badminton
-root_dir: /content/WASB-SBDT-bad/datasets/badminton
+root_dir: /content/drive/MyDrive/Projects/Thesis/WASB-SBDT-bad/datasets/badminton
 video_dirname: video
 frame_dirname: frame
 csv_dirname: csv
