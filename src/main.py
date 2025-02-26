@@ -13,15 +13,15 @@ def main(
         cfg: DictConfig
 ):
     # print(OmegaConf.to_yaml(cfg))
-    # print(cfg)
+    print(cfg)
 
     if cfg['output_dir'] is None:
         cfg['output_dir'] = '/content/WASB-SBDT-bad'
     mkdir_if_missing(cfg['output_dir'])
     
     runner = select_runner(cfg)
+    print(cfg)
     runner.run()
 
 if __name__ == "__main__":
     main()
-
