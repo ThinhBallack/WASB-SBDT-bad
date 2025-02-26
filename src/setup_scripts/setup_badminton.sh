@@ -1,8 +1,8 @@
 #!/bin/bash
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-BASE_DIR=$SCRIPT_DIR/../..
+BASE_DIR=/content/drive/MyDrive/Projects/Thesis/WASB-SBDT-bad
 
-mkdir -p ${BASE_DIR}/datasets/badminton
+# mkdir -p ${BASE_DIR}/datasets/badminton
 
 unzip /content/drive/MyDrive/Projects/Thesis/TrackNetV2.zip -d ${BASE_DIR}/datasets
 
