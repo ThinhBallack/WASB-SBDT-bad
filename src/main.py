@@ -8,7 +8,7 @@ from utils import mkdir_if_missing
 
 log = logging.getLogger(__name__)
 
-@hydra.main(version_base=None, config_name='/content/WASB-SBDT-bad', config_path='configs')
+@hydra.main(version_base=None, config_name='root', config_path='configs')
 def main(
         cfg: DictConfig
 ):
@@ -16,7 +16,7 @@ def main(
     # print(cfg)
 
     if cfg['output_dir'] is None:
-        cfg['output_dir'] = HydraConfig.get().run.dir
+        cfg['output_dir'] = '/content/WASB-SBDT-bad'
     mkdir_if_missing(cfg['output_dir'])
     
     runner = select_runner(cfg)
