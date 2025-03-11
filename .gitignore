@@ -6,3 +6,5 @@ datasets
 *.ini
 *.ipynb_checkpoints/
 *.csv
+outputs/
+*.log
