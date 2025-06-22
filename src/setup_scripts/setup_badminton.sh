@@ -6,10 +6,6 @@ BASE_DIR=/content/drive/MyDrive/Projects/Thesis/WASB-SBDT-bad
 
 unzip /content/drive/MyDrive/Projects/Thesis/TrackNetV2.zip -d ${BASE_DIR}/datasets
 
-mv ${BASE_DIR}/datasets/TrackNetV2/Professional/* ${BASE_DIR}/datasets/badminton/
-mv ${BASE_DIR}/datasets/TrackNetV2/Amateur/match1 ${BASE_DIR}/datasets/badminton/match24
-mv ${BASE_DIR}/datasets/TrackNetV2/Amateur/match2 ${BASE_DIR}/datasets/badminton/match25
-mv ${BASE_DIR}/datasets/TrackNetV2/Amateur/match3 ${BASE_DIR}/datasets/badminton/match26
 mv ${BASE_DIR}/datasets/TrackNetV2/Test/match1 ${BASE_DIR}/datasets/badminton/test_match1
 mv ${BASE_DIR}/datasets/TrackNetV2/Test/match2 ${BASE_DIR}/datasets/badminton/test_match2
 mv ${BASE_DIR}/datasets/TrackNetV2/Test/match3 ${BASE_DIR}/datasets/badminton/test_match3
