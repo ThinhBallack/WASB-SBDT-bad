@@ -1,10 +1,12 @@
 import os.path as osp
-import json
+import yaml
+import io
 import logging
 import random
 from collections import defaultdict
 import numpy as np
-import functools
+import pandas as pd
+import os
 from PIL import Image
 import cv2
 import torch
@@ -192,4 +194,56 @@ class ImageDataset(Dataset):
         else:
             return imgs_t, hms_t, trans_outputs_inv, xys, visis, img_paths_out
 
+def convert_csv_to_txt_YOLO_format(csv_path, train_images_dir, train_labels_dir, val_images_dir, val_labels_dir):
 
+    # Load CSV
+    df = pd.read_csv(csv_path)
+
+    # Frame resolution (replace with your actual resolution)
+    IMG_WIDTH = 1280
+    IMG_HEIGHT = 720
+
+    # Fixed bounding box size (adjust based on shuttlecock size in your frames)
+    BOX_WIDTH = 20  # in pixels
+    BOX_HEIGHT = 20
+
+    # Ensure label directories exist
+    os.makedirs(train_labels_dir, exist_ok=True)
+    os.makedirs(val_labels_dir, exist_ok=True)
+
+    # Split frame numbers for train/val (e.g., 80% train, 20% val)
+    total_frames = df['Frame number'].max()
+    split_frame = int(total_frames * 0.8)
+
+    for _, row in df.iterrows():
+        frame_num = row['Frame number']
+        visibility = row['Visibility']
+        x = row['X']
+        y = row['Y']
+        
+        # Determine if this frame is in train or val
+        if frame_num <= split_frame:
+            label_dir = train_labels_dir
+            frame_filename = f"frame_{frame_num:04d}.png"
+        else:
+            label_dir = val_labels_dir
+            frame_filename = f"frame_{frame_num:04d}.png"
+        
+        # Create label file
+        label_file = os.path.join(label_dir, f"frame_{frame_num:04d}.txt")
+        
+        if visibility == 1:
+            # Calculate normalized coordinates
+            x_center = x / IMG_WIDTH
+            y_center = y / IMG_HEIGHT
+            width = BOX_WIDTH / IMG_WIDTH
+            height = BOX_HEIGHT / IMG_HEIGHT
+            
+            # Write to label file (class 0 for shuttlecock)
+            with open(label_file, 'w') as f:
+                f.write(f"0 {x_center} {y_center} {width} {height}\n")
+        else:
+            # Empty file for no shuttlecock
+            open(label_file, 'w').close()
+
+    print("Label files generated!")
